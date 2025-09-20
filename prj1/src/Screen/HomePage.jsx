@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-const HomePage = () => {
+const HomePage = ({ user }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 10
     const [data, setData] = useState([]);
@@ -23,21 +23,27 @@ const HomePage = () => {
 
     return (
         <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, background: '#f0f2f5', padding: 20 }}>
-                {data.map((item, i) => (
-                    <CarouselCardAntd key={i} data={item} />
-                ))}
+            <div className="container1 w-full" style={{ margin: "0 auto", padding: 20, background: '#f0f2f5' }}>
+                <div className="banner">
+                    {/* <Carousel autoplay></Carousel> */}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 20, background: '#f0f2f5', padding: 20, width: '100%' }}>
+                    {data.map((item, i) => (
+                        <CarouselCardAntd key={i} data={item}/>
+                    ))}
 
+                </div>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 32 }}>
+                    <Pagination
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={total}
+                        onChange={handlePageChange}
+                        showSizeChanger={false}
+                    />
+                </div>
             </div>
-            <div style={{ display: "flex", justifyContent: "center", marginTop: 32 }}>
-                <Pagination
-                    current={currentPage}
-                    pageSize={pageSize}
-                    total={total}
-                    onChange={handlePageChange}
-                    showSizeChanger={false}
-                />
-            </div>
+
         </>
 
     );

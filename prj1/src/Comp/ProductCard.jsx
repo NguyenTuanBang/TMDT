@@ -9,7 +9,7 @@ const { Title, Text, Paragraph } = Typography;
 
 const CarouselCardAntd = ({data}) => {
   const navigate = useNavigate(); // ✅ tạo instance
-  const images = data.images || []; // giả sử data có trường images là mảng URL ảnh
+  const images = data.images || ["https://picsum.photos/600/400?random=1"]; // giả sử data có trường images là mảng URL ảnh
   const handleClick = () => {
     navigate(`/product/${data._id}`); // ✅ điều hướng
   };
@@ -39,7 +39,7 @@ const CarouselCardAntd = ({data}) => {
         ))}
       </Carousel>
 
-      {/* Title + Rating */}
+
       <Row justify="space-between" align="middle" style={{ marginTop: 20 }}>
         <Title level={5} style={{ margin: 0 }}>
           {data.productName}
@@ -51,11 +51,11 @@ const CarouselCardAntd = ({data}) => {
         </Row>
       </Row>
 
-      {/* Description */}
-      <Paragraph type="secondary" style={{ marginTop: 10 }}>
+
+      <Paragraph type="first" style={{ marginTop: 10 }}>
         {data.description}
       </Paragraph>
-      <Paragraph type="secondary" style={{ marginTop: 10 }}>
+      <Paragraph type="first" style={{ marginTop: 10 }} className="font-semibold">
         {data.store.storeName}
       </Paragraph>
 

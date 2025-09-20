@@ -1,6 +1,7 @@
 import ProductModel from "../Model/ProductModel.js";
 import "../Model/StoreModel.js";
 import "../Model/TagModel.js";
+import TagModel from "../Model/TagModel.js";
 
 const productController = {
   getAll: async (req, res) => {
@@ -74,6 +75,88 @@ const productController = {
       res.status(200).send({ message: "Success", data });
     } catch (error) {
       res.status(500).send({ message: "Error", error: error.message });
+    }
+  },
+  getByTag: async (req, res) => {
+    try {
+      const { tagId } = req.params;
+      const curPage = parseInt(req.query.curPage) || 1;
+      const itemQuantity = await ProductModel.countDocuments({ tags: tagId });
+      const numberOfPages = Math.ceil(itemQuantity / 20);
+
+      if (curPage > numberOfPages && numberOfPages > 0) {
+        return res.status(400).send({ message: "Invalid page number" });
+      }
+
+      const tag = await TagModel.findById(tagId);
+
+      const data = await ProductModel.find({ tags: tag })
+        .populate("store")
+        .populate("tags")
+        .limit(20)
+        .skip((curPage - 1) * 20);
+
+      res.status(200).send({
+        message: "Success",
+        data,
+        numberOfPages,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: "Error",
+        error: error.message,
+      });
+    }
+  },
+  getByPriceRange: async (req, res) => {
+    try {
+      const { min, max } = req.query;
+      const curPage = parseInt(req.query.curPage) || 1;
+      const itemQuantity = await ProductModel.countDocuments({
+        price: { $gte: min || 0, $lte: max || Number.MAX_SAFE_INTEGER },
+      });
+      const numberOfPages = Math.ceil(itemQuantity / 20);
+      const data = await ProductModel.find({
+        price: { $gte: min || 0, $lte: max || Number.MAX_SAFE_INTEGER },
+      })
+        .populate("store")
+        .populate("tags")
+        .limit(20)
+        .skip((curPage - 1) * 20);
+
+      res.status(200).send({
+        message: "Success",
+        data,
+        numberOfPages,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: "Error",
+        error: error.message,
+      });
+    }
+  },
+  getByStore: async (req, res) => {
+    try {
+      const { storeId } = req.params;
+      const curPage = parseInt(req.query.curPage) || 1;
+      const itemQuantity = await ProductModel.countDocuments({ store: storeId });
+      const numberOfPages = Math.ceil(itemQuantity / 20);
+      const data = await ProductModel.find({ store: storeId })
+        .populate("store")
+        .populate("tags")
+        .limit(20)
+        .skip((curPage - 1) * 20);
+      res.status(200).send({
+        message: "Success",
+        data,
+        numberOfPages,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: "Error",
+        error: error.message,
+      });
     }
   },
 };
