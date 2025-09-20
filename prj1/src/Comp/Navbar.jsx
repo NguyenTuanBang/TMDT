@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ const Navbar = ({ user, setUser }) => {
         {/* Avatar */}
         <img
           onClick={handleMyprofile}
-          src={user.avatar || "https://via.placeholder.com/40"}
+          src={user.avatar || "./default.jpg"}
           alt="avatar"
           className="w-9 h-9 rounded-full object-cover border-2 border-white shadow cursor-pointer hover:scale-105 transition"
         />
@@ -45,7 +46,11 @@ const Navbar = ({ user, setUser }) => {
   return (
     <nav className="flex justify-between items-center px-6 py-3 shadow-md bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
       {/* Left side (logo / brand name) */}
-      <div className="text-lg font-bold tracking-wide cursor-pointer">
+      <div className="text-lg font-bold tracking-wide cursor-pointer" 
+      onClick={() => {
+        navigate('/')
+        setTagFilter(null)
+      }}>
         MyWebsite
       </div>
 

@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import globalErrorHandle from './Controller/errorController.js';
 import AppError from './utils/appError.js';
+import tagsController from './Controller/tags.Controller.js';
 
 dotenvx.config();
 
@@ -34,6 +35,8 @@ app.use(
   "/img/avatars",
   express.static(path.join(__dirname, "public/img/avatars"))
 );
+app.get('/alltags', tagsController.getAll);
+app.get('/fivetags', tagsController.getFive);
 
 // xử lý 404
 app.use((req, res, next) => {
@@ -42,6 +45,7 @@ app.use((req, res, next) => {
 
 // xử lý error
 app.use(globalErrorHandle);
+
 
 app.listen(process.env.PORT_LOCAL, () => {
   console.log(`Server is running on port ${process.env.PORT_LOCAL}`);

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-const HomePage = ({ user }) => {
+const HomePage = ({ user, tagFilter }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 10
     const [data, setData] = useState([]);
@@ -21,6 +21,7 @@ const HomePage = ({ user }) => {
         fetchData();
     }, [currentPage]);
 
+    
     return (
         <>
             <div className="container1 w-full" style={{ margin: "0 auto", padding: 20, background: '#f0f2f5' }}>

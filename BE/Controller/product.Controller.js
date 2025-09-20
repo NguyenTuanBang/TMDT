@@ -2,6 +2,7 @@ import ProductModel from "../Model/ProductModel.js";
 import "../Model/StoreModel.js";
 import "../Model/TagModel.js";
 import TagModel from "../Model/TagModel.js";
+import "../Model/AreaModel.js"
 
 const productController = {
   getAll: async (req, res) => {
@@ -15,7 +16,7 @@ const productController = {
       }
 
       const data = await ProductModel.find()
-        .populate("store")
+        .populate({ path: "store", populate: { path: "area", model: "Area" } })
         .populate("tags")
         .limit(20)
         .skip((curPage - 1) * 20);

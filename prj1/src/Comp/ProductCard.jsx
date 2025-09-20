@@ -73,11 +73,23 @@ const CarouselCardAntd = ({data}) => {
             {data.price}$
           </Title>
         </div>
-
-        <Button type="primary" shape="round" onClick={handleClick}>
+        <div>
+          <Title
+            level={4}
+            style={{
+              margin: 0,
+              display: "inline",
+              color: "#1677ff",
+            }}
+          >
+            {data.store.area.name}
+          </Title>
+        </div>
+        
+      </Row>
+        <Button type="primary" shape="round" onClick={handleClick} style={{ marginTop: 10, width: '100%' }}>
           Mua ngay
         </Button>
-      </Row>
     </Card>
   );
 };
