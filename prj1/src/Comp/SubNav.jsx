@@ -9,9 +9,7 @@ const SubNavbar = ({ tagFilter, setTagFilter }) => {
     const [allTags, setAllTags] = useState([]);
     const [loadedAll, setLoadedAll] = useState(false);
 
-    const handleTagClick = (tag) => {
-        setTagFilter(tag._id);
-    };
+
 
     useEffect(() => {
         const fetchTags = async () => {
@@ -31,7 +29,7 @@ const SubNavbar = ({ tagFilter, setTagFilter }) => {
     }, []);
     const navigate = useNavigate();
     const handleOnclick=(id) => {
-        navigate(`/listProduct/${id}`);
+        navigate(`/listProduct?type=${id}`);
     }
 
     const handleToggleDropdown = async () => {

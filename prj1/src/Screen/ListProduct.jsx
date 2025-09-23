@@ -4,11 +4,16 @@ import { useEffect } from 'react';
 import CarouselCardAntd from "../Comp/ProductCard";
 import { Pagination, Carousel } from "antd";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 const ListProduct = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const type = queryParams.get("type");
+    const name = queryParams.get("name");
     const [currentPage, setCurrentPage] = useState(1);
-    const { type, name } = useParams();
+    
     const pageSize = 10;
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);

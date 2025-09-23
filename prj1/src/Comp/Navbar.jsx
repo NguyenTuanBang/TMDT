@@ -96,7 +96,7 @@ const Navbar = ({ user, setUser, }) => {
                   {totalCount > 5 && (
                     <div
                       className="p-3 text-blue-600 font-medium text-center border-t cursor-pointer hover:bg-blue-50"
-                      onClick={() => navigate(`/listProduct/name?keyword=${keyword}`)}
+                      onClick={() => navigate(`/listProduct?name=${keyword}`)}
                     >
                       Xem thêm {totalCount - 5} sản phẩm...
                     </div>

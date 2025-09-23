@@ -32,7 +32,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage user={user}/>} />
         <Route path='/product/:id' element={<ProductDetail user={user} />} />
-        <Route path="/listProduct/:type?:name?" element={<ListProduct user={user} />} />
+        <Route path="/listProduct" element={<ListProduct user={user} />} />
         <Route path="/myaccount" element={<MyAccount user={user} />}>
           <Route index element={<Profile user={user} setUser={setUser} />} />
           <Route path="profile" element={<Profile user={user} setUser={setUser} />} />
