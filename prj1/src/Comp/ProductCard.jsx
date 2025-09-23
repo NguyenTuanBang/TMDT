@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Carousel, Button, Typography, Row } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";  // ✅ đúng hook
+import formatCurrency from "../hooks/useCurrency";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -41,7 +42,7 @@ const CarouselCardAntd = ({data}) => {
 
 
       <Row justify="space-between" align="middle" style={{ marginTop: 20 }}>
-        <Title level={5} style={{ margin: 0 }}>
+        <Title level={5} style={{ margin: 0, fontSize: "x-large" }}>
           {data.productName}
         </Title>
 
@@ -70,7 +71,7 @@ const CarouselCardAntd = ({data}) => {
               color: "#1677ff",
             }}
           >
-            {data.price}$
+            {formatCurrency(data.price)} VNĐ
           </Title>
         </div>
         <div>
@@ -80,6 +81,7 @@ const CarouselCardAntd = ({data}) => {
               margin: 0,
               display: "inline",
               color: "#1677ff",
+              fontSize: "medium"
             }}
           >
             {data.store.area.name}

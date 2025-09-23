@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SubNavbar = ({ tagFilter, setTagFilter }) => {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -28,6 +29,10 @@ const SubNavbar = ({ tagFilter, setTagFilter }) => {
 
         fetchTags();
     }, []);
+    const navigate = useNavigate();
+    const handleOnclick=(id) => {
+        navigate(`/listProduct/${id}`);
+    }
 
     const handleToggleDropdown = async () => {
         if (!loadedAll) {
@@ -52,7 +57,7 @@ const SubNavbar = ({ tagFilter, setTagFilter }) => {
                 {tags.map((tag, idx) => (
                     <span
                         key={idx}
-                        onClick={() => handleTagClick(tag)}
+                        onClick={() => handleOnclick(tag._id)}
                         className="px-1 py-2 bg-blue-100 rounded-full text-base text-gray-800 cursor-pointer hover:bg-blue-200 transition"
                     >
                         {tag.nameTag}

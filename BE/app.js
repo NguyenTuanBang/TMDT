@@ -28,6 +28,8 @@ app.use(cookieParser());
 mongoose.connect(process.env.MONGO_URL);
 
 app.use('/products', productRouter);
+
+
 app.use("/api/users", userRouter);
 
 // phục vụ file tĩnh

@@ -17,7 +17,9 @@ const StorePage = () => {
 
   return (
     <>
+        <div className=''>
 
+        </div>
     </>
   )
 }

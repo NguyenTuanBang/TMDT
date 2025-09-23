@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const billSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
     buyer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -42,5 +42,5 @@ const billSchema = new mongoose.Schema({
     }
 });
 
-const BillModel = mongoose.model("Bill", billSchema);
-export default BillModel;
+const OrderModel = mongoose.model("order", OrderSchema);
+export default OrderModel;
